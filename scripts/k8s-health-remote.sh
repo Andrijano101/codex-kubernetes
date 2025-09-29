@@ -10,7 +10,7 @@ while [[ $# -gt 0 ]]; do
   case "$1" in
     --host) HOST="$2"; shift 2 ;;
     --user) USER="$2"; shift 2 ;;
-    --key)  KEY="$2";  shift 2 ;;
+    --key)  KEY="$2"; shift 2 ;;
     *) echo "Unknown arg: $1"; exit 2 ;;
   esac
 done
@@ -57,12 +57,12 @@ kc get pv || true
 echo
 
 echo "=== Summary ==="
-NOTREADY="$( kc get nodes --no-headers 2>/dev/null | awk '$2!="Ready"' | wc -l || echo 0 )"
+NOTREADY="$( kc get nodes --no-headers 2>/dev/null | awk '$2!="Ready"{c++} END{print c+0}' )"
 CRASH="$( kc get pods -A 2>/dev/null | egrep -Ec 'CrashLoopBackOff|OOMKilled' || echo 0 )"
-echo "Nodes NotReady: ${NOTREADY:-0}"
-echo "CrashLoop/OOMKilled pods: ${CRASH:-0}"
+echo "Nodes NotReady: $NOTREADY"
+echo "CrashLoop/OOMKilled pods: $CRASH"
 
-if [ "${NOTREADY:-0}" -gt 0 ] || [ "${CRASH:-0}" -gt 0 ]; then
+if [ "$NOTREADY" -gt 0 ] || [ "$CRASH" -gt 0 ]; then
   exit 1
 fi
 exit 0
