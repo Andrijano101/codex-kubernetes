@@ -58,7 +58,8 @@ echo
 
 echo "=== Summary ==="
 NOTREADY="$( kc get nodes --no-headers 2>/dev/null | awk '$2!="Ready"{c++} END{print c+0}' )"
-CRASH="$( kc get pods -A 2>/dev/null | egrep -Ec 'CrashLoopBackOff|OOMKilled' || echo 0 )"
+CRASH="$( kc get pods -A 2>/dev/null | egrep -Ec 'CrashLoopBackOff|OOMKilled' || true )"
+[ -z "$CRASH" ] && CRASH=0
 echo "Nodes NotReady: $NOTREADY"
 echo "CrashLoop/OOMKilled pods: $CRASH"
 
