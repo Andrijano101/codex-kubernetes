@@ -1,0 +1,47 @@
+=== Host & Time ===
+k8s-devops-master01
+Mon Sep 29 02:24:32 PM UTC 2025
+
+=== Kubernetes version (client) ===
+Client Version: v1.33.3+rke2r1
+Kustomize Version: v5.6.0
+
+=== Nodes (wide) ===
+NAME                  STATUS   ROLES                              AGE   VERSION          INTERNAL-IP    EXTERNAL-IP   OS-IMAGE             KERNEL-VERSION       CONTAINER-RUNTIME
+k8s-devops-master01   Ready    control-plane,etcd,master,worker   31d   v1.33.3+rke2r1   10.101.21.31   <none>        Ubuntu 22.04.4 LTS   5.15.0-153-generic   containerd://2.0.5-k3s2
+k8s-devops-master02   Ready    control-plane,etcd,master,worker   31d   v1.33.3+rke2r1   10.101.21.32   <none>        Ubuntu 22.04.4 LTS   5.15.0-153-generic   containerd://2.0.5-k3s2
+k8s-devops-master03   Ready    control-plane,etcd,master,worker   31d   v1.33.3+rke2r1   10.101.21.33   <none>        Ubuntu 22.04.4 LTS   5.15.0-153-generic   containerd://2.0.5-k3s2
+k8s-devops-worker01   Ready    worker                             31d   v1.33.3+rke2r1   10.101.36.41   <none>        Ubuntu 22.04.4 LTS   5.15.0-152-generic   containerd://2.0.5-k3s2
+k8s-devops-worker02   Ready    worker                             31d   v1.33.3+rke2r1   10.101.36.42   <none>        Ubuntu 22.04.4 LTS   5.15.0-152-generic   containerd://2.0.5-k3s2
+k8s-devops-worker03   Ready    worker                             31d   v1.33.3+rke2r1   10.101.36.43   <none>        Ubuntu 22.04.4 LTS   5.15.0-153-generic   containerd://2.0.5-k3s2
+k8s-devops-worker04   Ready    worker                             31d   v1.33.3+rke2r1   10.101.36.44   <none>        Ubuntu 22.04.4 LTS   5.15.0-153-generic   containerd://2.0.5-k3s2
+
+=== Nodes NotReady ===
+
+=== Pods not Running/Succeeded ===
+NAMESPACE   NAME                                 READY   STATUS              RESTARTS   AGE
+harbor      harbor-jobservice-654fdb75d6-6svkh   0/1     ContainerCreating   0          31d
+harbor      harbor-registry-5578d67b59-x55cp     0/2     ContainerCreating   0          31d
+
+=== CrashLoopBackOff / OOMKilled ===
+
+=== Recent warnings (last 100 lines) ===
+
+=== Storage (PVC/PV) ===
+NAMESPACE   NAME                              STATUS   VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS   VOLUMEATTRIBUTESCLASS   AGE
+harbor      data-harbor-redis-0               Bound    pvc-535543ef-185a-42b4-8f37-88049b7665cb   2Gi        RWO            ceph-rbd       <unset>                 31d
+harbor      data-harbor-trivy-0               Bound    pvc-54705e8c-2201-4abc-a243-7ec151943f23   5Gi        RWO            ceph-rbd       <unset>                 31d
+harbor      database-data-harbor-database-0   Bound    pvc-70b4b37c-b405-4ccf-a83f-c752a08e3b67   5Gi        RWO            ceph-rbd       <unset>                 31d
+harbor      harbor-jobservice                 Bound    pvc-9b58cf60-cac9-48ec-91fe-e5d852e12786   1Gi        RWO            ceph-rbd       <unset>                 31d
+harbor      harbor-registry                   Bound    pvc-5ed2a500-c47f-406f-bd79-d29ed742319c   10Gi       RWO            ceph-rbd       <unset>                 31d
+NAME                                       CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS   CLAIM                                    STORAGECLASS   VOLUMEATTRIBUTESCLASS   REASON   AGE
+pvc-535543ef-185a-42b4-8f37-88049b7665cb   2Gi        RWO            Delete           Bound    harbor/data-harbor-redis-0               ceph-rbd       <unset>                          31d
+pvc-54705e8c-2201-4abc-a243-7ec151943f23   5Gi        RWO            Delete           Bound    harbor/data-harbor-trivy-0               ceph-rbd       <unset>                          31d
+pvc-5ed2a500-c47f-406f-bd79-d29ed742319c   10Gi       RWO            Delete           Bound    harbor/harbor-registry                   ceph-rbd       <unset>                          31d
+pvc-70b4b37c-b405-4ccf-a83f-c752a08e3b67   5Gi        RWO            Delete           Bound    harbor/database-data-harbor-database-0   ceph-rbd       <unset>                          31d
+pvc-9b58cf60-cac9-48ec-91fe-e5d852e12786   1Gi        RWO            Delete           Bound    harbor/harbor-jobservice                 ceph-rbd       <unset>                          31d
+
+=== Summary ===
+Nodes NotReady: 0
+CrashLoop/OOMKilled pods: 0
+0
